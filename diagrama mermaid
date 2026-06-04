@@ -1,0 +1,39 @@
+```mermaid
+flowchart LR
+
+    %% Actor
+    Cliente["Cliente Móvil FinTech Nova"]
+
+    %% Internet
+    Internet["Internet / HTTPS"]
+
+    %% Entorno
+    subgraph Codespaces["GitHub Codespaces (Azure Cloud Container)"]
+        FastAPI["FastAPI Framework"]
+
+        Evaluar["POST /evaluar-riesgo\n(Aprobado / Rechazado / En Revisión)\nProtegido"]
+        Status["GET /status\nEstado de Salud API\nPúblico"]
+        Datos["GET /datos-financieros/{id}\nHistorial de Transacciones\n⚠️ Vulnerable: Sin Autenticación"]
+    end
+
+    %% Flujo principal
+    Cliente -->|"HTTPS Request"| Internet
+    Internet --> Codespaces
+
+    %% Rutas internas
+    FastAPI --> Evaluar
+    FastAPI --> Status
+    FastAPI --> Datos
+
+    %% Respuestas
+    Evaluar -->|"JSON Response"| Internet
+    Status -->|"JSON Response"| Internet
+    Datos -->|"JSON Response"| Internet
+
+    Internet --> Cliente
+
+    %% Estilos
+    style Evaluar fill:#d4edda,stroke:#155724,stroke-width:2px
+    style Status fill:#fff3cd,stroke:#856404,stroke-width:2px
+    style Datos fill:#f8d7da,stroke:#721c24,stroke-width:2px
+    style FastAPI fill:#e2e3e5,stroke:#495057
