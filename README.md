@@ -13,6 +13,9 @@
 
 ## Laboratorio 1 — Estado: COMPLETADO
 
+### URL del Codespace
+https://studious-broccoli-jrjqpvvw7w4pfqrpp-8000.app.github.dev
+
 ### Endpoints disponibles
 
 | Endpoint | Metodo | Descripcion |
