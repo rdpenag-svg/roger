@@ -1,0 +1,22 @@
+# Control de versiones
+.git/
+.gitignore
+
+# Archivos de entorno con secretos
+.env
+*.env
+
+# Cache de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Backups (no necesarios en el contenedor)
+backups/
+*.tar.gz
+*.log
+
+# Archivos temporales
+*.tmp
+*.swp
+.DS_Store

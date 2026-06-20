@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from health_check import run_all_checks 
 
 app = FastAPI(title="FinTech Nova - Motor de Riesgo", version="1.0.0")
 
@@ -26,3 +27,13 @@ def evaluar_riesgo(solicitud: SolicitudCredito):
 @app.get("/datos-financieros/{id_cliente}")
 def obtener_historial(id_cliente: int):
     return {"cliente_id": id_cliente, "historial": "Limpio", "score_interno": 750}
+
+from fastapi import FastAPI, HTTPException
+# ... (tu código de API existente) ...
+# Agrega esta función:
+@app.get('/health')
+def health_check_endpoint():
+    result = run_all_checks()
+    if result['status'] == 'unhealthy':
+        raise HTTPException(status_code=503, detail=result)
+    return result
